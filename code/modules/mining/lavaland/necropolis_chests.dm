@@ -984,7 +984,6 @@
 	switch(loot)
 		if(1)
 			new /obj/item/mayhem(src)
-			new /obj/item/gun/magic/staff/spellblade(src)
 		if(2)
 			new /obj/item/blood_contract(src)
 			new /obj/item/gun/magic/staff/spellblade(src)
