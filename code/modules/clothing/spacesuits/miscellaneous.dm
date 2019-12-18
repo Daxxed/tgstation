@@ -248,6 +248,25 @@ Contains:
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/ert/jani
 	allowed = list(/obj/item/storage/bag/trash, /obj/item/melee/flyswatter, /obj/item/mop, /obj/item/holosign_creator, /obj/item/reagent_containers/glass/bucket, /obj/item/reagent_containers/spray/chemsprayer/janitor)
 
+/obj/item/clothing/suit/space/hardsuit/ert/berserker
+	name = "champion's hardsuit"
+	desc = "Voices echo from the hardsuit, driving the user insane."
+	icon_state = "hardsuit-berserker"
+	item_state = "hardsuit-berserker"
+	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/ert/berserker
+	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
+	resistance_flags = FIRE_PROOF
+
+/obj/item/clothing/head/helmet/space/hardsuit/ert/berserker
+	name = "champion's helmet"
+	desc = "Peering into the eyes of the helmet is enough to seal damnation."
+	icon_state = "hardsuit0-berserker"
+	item_state = "hardsuit0-berserker"
+	hardsuit_type = "berserker"
+	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
+	actions_types = list()
+	resistance_flags = FIRE_PROOF
+
 /obj/item/clothing/suit/space/eva
 	name = "EVA suit"
 	icon_state = "space"
@@ -358,20 +377,6 @@ Contains:
 	icon_state = "hardsuit0-inq"
 	item_state = "hardsuit0-inq"
 	hardsuit_type = "inq"
-
-/obj/item/clothing/suit/space/hardsuit/ert/paranormal/berserker
-	name = "champion's hardsuit"
-	desc = "Voices echo from the hardsuit, driving the user insane."
-	icon_state = "hardsuit-berserker"
-	item_state = "hardsuit-berserker"
-	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/ert/paranormal/berserker
-
-/obj/item/clothing/head/helmet/space/hardsuit/ert/paranormal/berserker
-	name = "champion's helmet"
-	desc = "Peering into the eyes of the helmet is enough to seal damnation."
-	icon_state = "hardsuit0-berserker"
-	item_state = "hardsuit0-berserker"
-	hardsuit_type = "berserker"
 
 /obj/item/clothing/head/helmet/space/fragile
 	name = "emergency space helmet"

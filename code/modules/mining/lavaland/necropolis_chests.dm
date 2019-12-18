@@ -13,7 +13,7 @@
 	desc = "It's watching you suspiciously."
 
 /obj/structure/closet/crate/necropolis/tendril/PopulateContents()
-	var/loot = rand(1,28)
+	var/loot = rand(1,26)
 	switch(loot)
 		if(1)
 			new /obj/item/shared_storage/red(src)
@@ -41,44 +41,39 @@
 		if(11)
 			new /obj/item/ship_in_a_bottle(src)
 		if(12)
-			new /obj/item/clothing/suit/space/hardsuit/ert/paranormal/berserker(src)
+			new /obj/item/clothing/suit/space/hardsuit/ert/berserker(src)
 		if(13)
 			new /obj/item/jacobs_ladder(src)
 		if(14)
-			new /obj/item/nullrod/scythe/talking(src)
-		if(15)
-			new /obj/item/nullrod/armblade(src)
-		if(16)
 			new /obj/item/guardiancreator(src)
-		if(17)
+		if(15)
 			if(prob(50))
 				new /obj/item/disk/design_disk/modkit_disc/mob_and_turf_aoe(src)
 			else
 				new /obj/item/disk/design_disk/modkit_disc/bounty(src)
-		if(18)
+		if(16)
 			new /obj/item/warp_cube/red(src)
-		if(19)
+		if(17)
 			new /obj/item/wisp_lantern(src)
-		if(20)
+		if(18)
 			new /obj/item/immortality_talisman(src)
-		if(21)
+		if(19)
 			new /obj/item/gun/magic/hook(src)
-		if(22)
+		if(20)
 			new /obj/item/voodoo(src)
-		if(23)
+		if(21)
 			new /obj/item/grenade/clusterbuster/inferno(src)
-		if(24)
-			new /obj/item/reagent_containers/food/drinks/bottle/holywater/hell(src)
-			new /obj/item/clothing/suit/space/hardsuit/ert/paranormal/inquisitor(src)
-		if(25)
+		if(22)
 			new /obj/item/book/granter/spell/summonitem(src)
-		if(26)
+		if(23)
 			new /obj/item/book_of_babel(src)
-		if(27)
+		if(24)
 			new /obj/item/borg/upgrade/modkit/lifesteal(src)
 			new /obj/item/bedsheet/cult(src)
-		if(28)
+		if(25)
 			new /obj/item/clothing/neck/necklace/memento_mori(src)
+		if(26)
+			new /obj/item/clothing/suit/space/hardsuit/ert/berserker(src)
 
 //KA modkit design discs
 /obj/item/disk/design_disk/modkit_disc
@@ -415,7 +410,8 @@
 	armour_penetration = 100
 	damage_type = BRUTE
 	hitsound = 'sound/effects/splat.ogg'
-	paralyze = 30
+	knockdown = 30
+	paralyze = 10
 	var/chain
 
 /obj/projectile/hook/fire(setAngle)
@@ -452,7 +448,8 @@
 
 /obj/projectile/hook/bounty
 	damage = 0
-	paralyze = 20
+	knockdown = 20
+	paralyze = 0
 
 //Immortality Talisman
 /obj/item/immortality_talisman
@@ -466,7 +463,6 @@
 
 /obj/item/immortality_talisman/Initialize()
 	. = ..()
-	AddComponent(/datum/component/anti_magic, TRUE, TRUE, TRUE)
 
 /datum/action/item_action/immortality
 	name = "Immortality"
@@ -749,16 +745,14 @@
 	name = "dragon chest"
 
 /obj/structure/closet/crate/necropolis/dragon/PopulateContents()
-	var/loot = rand(1,4)
+	var/loot = rand(1,3)
 	switch(loot)
 		if(1)
 			new /obj/item/melee/ghost_sword(src)
 		if(2)
 			new /obj/item/lava_staff(src)
-		if(3)
 			new /obj/item/book/granter/spell/sacredflame(src)
-			new /obj/item/gun/magic/wand/fireball(src)
-		if(4)
+		if(3)
 			new /obj/item/dragons_blood(src)
 
 /obj/structure/closet/crate/necropolis/dragon/crusher
@@ -778,7 +772,7 @@
 	flags_1 = CONDUCT_1
 	sharpness = IS_SHARP
 	w_class = WEIGHT_CLASS_BULKY
-	force = 1
+	force = 20
 	throwforce = 1
 	hitsound = 'sound/effects/ghost2.ogg'
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "rended")
@@ -846,16 +840,16 @@
 	return ghost_counter
 
 /obj/item/melee/ghost_sword/attack(mob/living/target, mob/living/carbon/human/user)
-	force = 0
+	force = 20
 	var/ghost_counter = ghost_check()
 
-	force = CLAMP((ghost_counter * 4), 0, 75)
+	force = CLAMP((ghost_counter * 4 + 20), 0, 75)
 	user.visible_message("<span class='danger'>[user] strikes with the force of [ghost_counter] vengeful spirits!</span>")
 	..()
 
 /obj/item/melee/ghost_sword/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK)
 	var/ghost_counter = ghost_check()
-	final_block_chance += CLAMP((ghost_counter * 5), 0, 75)
+	final_block_chance += CLAMP((ghost_counter * 5 + 30), 0, 75)
 	owner.visible_message("<span class='danger'>[owner] is protected by a ring of [ghost_counter] ghosts!</span>")
 	return ..()
 
@@ -933,7 +927,7 @@
 	var/reset_turf_type = /turf/open/floor/plating/asteroid/basalt
 	var/reset_string = "basalt"
 	var/create_cooldown = 100
-	var/create_delay = 30
+	var/create_delay = 15
 	var/reset_cooldown = 50
 	var/timer = 0
 	var/static/list/banned_turfs = typecacheof(list(/turf/open/space/transit, /turf/closed))
@@ -986,13 +980,13 @@
 /obj/structure/closet/crate/necropolis/bubblegum/PopulateContents()
 	new /obj/item/clothing/suit/space/hostile_environment(src)
 	new /obj/item/clothing/head/helmet/space/hostile_environment(src)
-	var/loot = rand(1,3)
+	var/loot = rand(1,2)
 	switch(loot)
 		if(1)
 			new /obj/item/mayhem(src)
+			new /obj/item/gun/magic/staff/spellblade(src)
 		if(2)
 			new /obj/item/blood_contract(src)
-		if(3)
 			new /obj/item/gun/magic/staff/spellblade(src)
 
 /obj/structure/closet/crate/necropolis/bubblegum/crusher
